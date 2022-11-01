@@ -1,9 +1,11 @@
 def formingMagicSquare(s)
   # Write your code here
-  cost = []
+  costs = []
+  aux = 0
   if s[1][1] != 5
-    cost.push((s[1][1] - 5).abs)
+    cost = (s[1][1] - 5).abs
     s[1][1] = 5
+    aux = cost
   end
 
   if s[0].sum == 15 && s[1].sum == 15 && s[2].sum == 15
@@ -12,15 +14,15 @@ def formingMagicSquare(s)
 
   type1 = [8,1,6,7,2,9,4,3]
   #rotating type 1
-  array_type1 = [type1]
+  array_type = [type1]
   (1..7).each do |i|
-    array_type1.push(type1.rotate(i))
+    array_type.push(type1.rotate(i))
   end
   #rotating type 2
   type2 = [8,3,4,9,2,7,6,1]
-  array_type2 = [type2]
+  array_type.push(type2)
   (1..7).each do |i|
-    array_type2.push(type2.rotate(i))
+    array_type.push(type2.rotate(i))
   end
 
   array = []
@@ -33,42 +35,15 @@ def formingMagicSquare(s)
   array.push(s[2][0])
   array.push(s[1][0])
 
-  counter = 0
-  max = 0
-  champ = 0
 
-  array_type1.each_with_index do |elem , i|
+  array_type.each_with_index do |elem , i|
     elem.each_with_index do |elem2, j|
-      if elem2 == array[j]
-        counter += 1
-      end
+      cost += (elem2 - array[j]).abs
     end
-    if counter > max
-      max = counter
-      champ = elem
-    end
-    counter = 0
+    costs.push(cost)
+    cost = aux
   end
-  array_type2.each_with_index do |elem , i|
-    elem.each_with_index do |elem2, j|
-      if elem2 == array[j]
-        counter += 1
-      end
-    end
-    if counter > max
-      max = counter
-      champ = elem
-    end
-    counter = 0
-  end
-
-  champ.each_with_index do |elem, i|
-    if champ[i] != array[i]
-      cost += (array[i] - champ[i]).abs
-      array[i] = champ[i]
-    end
-  end
-  cost
+  costs.min
 end
 
 array1 = [
