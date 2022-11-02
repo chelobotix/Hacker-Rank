@@ -24,12 +24,8 @@ def climbingLeaderboard(ranked, player)
     elsif score < ranked[-1]
       leader_board.push(array.max + 1)
     else
-      (0...ranked.length - 1).each do |j|
-        if score.between?(ranked[j+1], ranked[j])
-          leader_board.push(array[j+1])
-          break
-        end
-      end
+      index = ranked.index(ranked.min_by{|x| (score-x).abs})
+      leader_board.push(array[index])
     end
 
   end
@@ -41,6 +37,7 @@ players_score1 = [70, 80, 105]
 ranked2 = [100,100,50,40,40,20,10]
 players_score2 = [5, 25, 50, 120]
 p climbingLeaderboard(ranked2, players_score2)
+
 
 
 
