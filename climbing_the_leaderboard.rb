@@ -1,38 +1,48 @@
-def climbingLeaderboard(ranked, player)
-  # Write your code here
-  # ensure uniq
-  ranked = ranked.uniq
 
-  results = []
-  # point to the last spot
-  rank_ptr = ranked.size - 1
+  def climbingLeaderboard(ranked, player)
+    # Write your code here
+    #makink array uniq
+    ranked.uniq!
+    #counting items below the lowest score
+    under_score = player.count{|i| i < ranked[-1]}
+    #counting items above or equal to the highest score
+    over_score = player.count{|i| i >= ranked[0]}
+    #deleting items
+    player.reject! {|i| i < ranked[-1] || i >= ranked[0] }
 
-  # two pointers moving around?
-  player.each do |score|
-      if score < ranked[rank_ptr]
-          # 1 based, actual spot is behind the one comparing
-          results.push(rank_ptr + 2)
-      else
-          # moving rank_ptr until it's actually bigger than score
-          while(ranked[rank_ptr] <= score && rank_ptr >= 0)
-              rank_ptr -= 1
+    #create LeaderBoard array
+    array = []
+    leader_board = Array.new(under_score, ranked.length + 1)
+
+    #mapping raiting
+    counter = ranked.length
+    ranked.reverse!
+    ranked.each_with_index do |rank, i|
+      if player.length > 0
+        while player[0] < ranked[i+1]
+          leader_board.push(counter)
+          player.delete_at(0)
+
+          if player.length == 0
+            break
           end
-          # ok find the one
-          results.push(rank_ptr + 2)
+        end
       end
+      counter -= 1
+
+    end
+    #adding the first place to a leader_board array
+    over_score.times { |i| leader_board.push(1)}
+    #return array
+    leader_board
   end
-  results
 
-
-
-
-end
 
 ranked1 = [100,90,90,80]
 players_score1 = [70, 80, 105]
 ranked2 = [100,100,50,40,40,20,10]
 players_score2 = [5, 25, 50, 120]
-climbingLeaderboard(ranked2, players_score2)
+p climbingLeaderboard(ranked1, players_score1)
 
 
 
