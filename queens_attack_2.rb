@@ -11,7 +11,8 @@ def queensAttack(n, k, r_q, c_q, obstacles)
   sum = 0
 
   #sum row
-  (r_q-1).downto(0).each do |i|
+  p c_q-1
+  (c_q-1).downto(0).each do |i|
     if board[r_q][i] == 0
       board[r_q][i] = 5
       sum += 1
@@ -20,7 +21,7 @@ def queensAttack(n, k, r_q, c_q, obstacles)
     end
   end
 
-  (r_q+1..n-1).each do |i|
+  (c_q+1..n-1).each do |i|
     if board[r_q][i] == 0
       board[r_q][i] = 5
       sum += 1
@@ -30,7 +31,7 @@ def queensAttack(n, k, r_q, c_q, obstacles)
   end
 
   #sum column
-  (c_q-1).downto(0).each do |i|
+  (r_q-1).downto(0).each do |i|
     if board[i][c_q] == 0
       board[i][c_q] = 5
       sum += 1
@@ -39,7 +40,7 @@ def queensAttack(n, k, r_q, c_q, obstacles)
     end
   end
 
-  (c_q+1..n-1).each do |i|
+  (r_q+1..n-1).each do |i|
     if board[i][c_q] == 0
       board[i][c_q] = 5
       sum += 1
@@ -107,19 +108,19 @@ def queensAttack(n, k, r_q, c_q, obstacles)
 
 end
 
-# n = 8
-# k = 0
-# r_q = 4
-# c_q = 4
-# obstacles = []
-# queensAttack(n, obstacles, r_q, c_q, obstacles )
+n = 8
+k = 0
+r_q = 4
+c_q = 4
+obstacles = []
+queensAttack(n, obstacles, r_q, c_q, obstacles )
 
-# n = 4
-# k = 0
-# r_q = 4
-# c_q = 4
-# obstacles = []
-# queensAttack(n, obstacles, r_q, c_q, obstacles )
+n = 4
+k = 0
+r_q = 4
+c_q = 4
+obstacles = []
+queensAttack(n, obstacles, r_q, c_q, obstacles )
 
 n = 5
 k = 0
