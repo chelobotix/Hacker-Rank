@@ -7,6 +7,10 @@ def queensAttack(n, k, r_q, c_q, obstacles)
   c_q = c_q - 1
   # put queen position on the board
   board[r_q][c_q] = 1
+  #put obstacles in the board
+  obstacles.each do |obstacle|
+    board[obstacle[0]-1][obstacle[1]-1] = 3
+  end
 
   sum = 0
 
@@ -17,7 +21,7 @@ def queensAttack(n, k, r_q, c_q, obstacles)
       board[r_q][i] = 5
       sum += 1
     else
-      next
+      break
     end
   end
 
@@ -26,7 +30,7 @@ def queensAttack(n, k, r_q, c_q, obstacles)
       board[r_q][i] = 5
       sum += 1
     else
-      next
+      break
     end
   end
 
@@ -36,7 +40,7 @@ def queensAttack(n, k, r_q, c_q, obstacles)
       board[i][c_q] = 5
       sum += 1
     else
-      next
+      break
     end
   end
 
@@ -45,7 +49,7 @@ def queensAttack(n, k, r_q, c_q, obstacles)
       board[i][c_q] = 5
       sum += 1
     else
-      next
+      break
     end
   end
 
@@ -58,7 +62,7 @@ def queensAttack(n, k, r_q, c_q, obstacles)
       board[i][j] = 5
       sum += 1
     else
-      next
+      break
     end
     i -= 1
     j -= 1
@@ -71,7 +75,7 @@ def queensAttack(n, k, r_q, c_q, obstacles)
       board[i][j] = 5
       sum += 1
     else
-      next
+      break
     end
     i += 1
     j += 1
@@ -85,7 +89,7 @@ def queensAttack(n, k, r_q, c_q, obstacles)
       board[i][j] = 5
       sum += 1
     else
-      next
+      break
     end
     i -= 1
     j += 1
@@ -98,7 +102,7 @@ def queensAttack(n, k, r_q, c_q, obstacles)
       board[i][j] = 5
       sum += 1
     else
-      next
+      break
     end
     i += 1
     j -= 1
@@ -112,7 +116,7 @@ n = 8
 k = 0
 r_q = 4
 c_q = 4
-obstacles = []
+obstacles = [[3,5]]
 queensAttack(n, obstacles, r_q, c_q, obstacles )
 
 n = 4
@@ -126,6 +130,13 @@ n = 5
 k = 0
 r_q = 4
 c_q = 3
-obstacles = []
+obstacles = [[5,5],[4,2],[2,3]]
 queensAttack(n, obstacles, r_q, c_q, obstacles )
 
+
+n = 100000
+k = 0
+r_q = 4187
+c_q = 5068
+obstacles = []
+p queensAttack(n, obstacles, r_q, c_q, obstacles )
