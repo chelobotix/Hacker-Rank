@@ -7,6 +7,7 @@ def queensAttack(n, k, r_q, c_q, obstacles)
   c_q = c_q - 1
   # put queen position on the board
   board[r_q][c_q] = 1
+
   #put obstacles in the board
   obstacles.each do |obstacle|
     board[obstacle[0]-1][obstacle[1]-1] = 3
